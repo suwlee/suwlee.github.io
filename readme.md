@@ -3,7 +3,7 @@
 
 Toss Pay 는 ...
 
-!(http://2.bp.blogspot.com/-FsmE4jGmZHk/U8kXcyRUBwI/AAAAAAAAKb4/g2n6v-sq_Tc/s1600/hula-minion.png)
+![](http://2.bp.blogspot.com/-FsmE4jGmZHk/U8kXcyRUBwI/AAAAAAAAKb4/g2n6v-sq_Tc/s1600/hula-minion.png)
 
 개발 가이드
 ---------------
