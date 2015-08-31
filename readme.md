@@ -75,3 +75,5 @@ Flatdoc then simply renders *menu* and *content* DOM elements to your HTML
 document. Flatdoc also comes with a default theme to style your page for you, or
 you may opt to create your own styles.
 
+ACKNOWLEDGEMENTS
+------------
