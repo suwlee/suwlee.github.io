@@ -58,7 +58,7 @@ Flatdoc.run({
 Flatdoc is a hosted `.js` file (along with a theme and its assets) that you can
 add into any page hosted anywhere.
 
-#### 결제 생성
+### 결제 생성
 
 There are no build scripts or 3rd-party services involved. Everything is done in
 the browser. Worried about performance? Oh, It's pretty fast.
@@ -66,7 +66,7 @@ the browser. Worried about performance? Oh, It's pretty fast.
 Flatdoc utilizes the [GitHub API] to fetch your project's Readme files. You may
 also configure it to fetch any arbitrary URL via AJAX.
 
-#### 결제 취소 및 환불
+### 결제 취소 및 환불
 
 Next, it uses [marked], an extremely fast Markdown parser that has support for
 GitHub flavored Markdown.
@@ -74,6 +74,3 @@ GitHub flavored Markdown.
 Flatdoc then simply renders *menu* and *content* DOM elements to your HTML
 document. Flatdoc also comes with a default theme to style your page for you, or
 you may opt to create your own styles.
-
-ACKNOWLEDGEMENTS
-------------
