@@ -5,10 +5,10 @@ Toss Pay 는 ...
 
 ![](http://2.bp.blogspot.com/-FsmE4jGmZHk/U8kXcyRUBwI/AAAAAAAAKb4/g2n6v-sq_Tc/s1600/hula-minion.png)
 
-개발 가이드
+Dev Guide
 ---------------
 
-### 시작하기
+### Getting Started
 
 To fetch a Github Repository's readme file, use the `Flatdoc.github` fetcher.
 This will fetch the Readme file of the repository's default branch.
@@ -32,7 +32,7 @@ After you've done this, you probably want to deploy it via [GitHub Pages].
 
 [GitHub Pages guide >][GitHub Pages]
 
-### Toss 결제 개요
+### Toss Payment Overview
 
 You may also fetch a file. In this example, this fetches the file `Readme.md` in
 the same folder as the HTML file.
@@ -52,13 +52,13 @@ Flatdoc.run({
 });
 ```
 
-정책
+Policy
 ------------
 
 Flatdoc is a hosted `.js` file (along with a theme and its assets) that you can
 add into any page hosted anywhere.
 
-### 결제 생성
+### Creating Payment
 
 There are no build scripts or 3rd-party services involved. Everything is done in
 the browser. Worried about performance? Oh, It's pretty fast.
@@ -66,7 +66,7 @@ the browser. Worried about performance? Oh, It's pretty fast.
 Flatdoc utilizes the [GitHub API] to fetch your project's Readme files. You may
 also configure it to fetch any arbitrary URL via AJAX.
 
-### 결제 취소 및 환불
+### Cancellation & Refund
 
 Next, it uses [marked], an extremely fast Markdown parser that has support for
 GitHub flavored Markdown.
