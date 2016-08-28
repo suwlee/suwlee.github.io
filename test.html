@@ -25,7 +25,7 @@
             var sendListUrl = "https://m.pay.naver.com/send/m/list/s";
             if(isNaverApp == "N") {
                 if (window.confirm("어라라? 송금은 네이버앱에서만 가능합니다. \n네이버앱으로 이동하시겠습니까?")) {
-                    alert('Y1');
+                    alert('isAndorid? ' + isAndorid);
                     if(isAndorid == "Y") {
                         alert('android');
                         location.href = "intent://inappbrowser?url=" + encodeURIComponent(sendUrl) + "&target=new&version=6#Intent;scheme=com.linecorp.linemanth;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.linecorp.linemanth;end";
