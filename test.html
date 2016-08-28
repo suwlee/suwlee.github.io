@@ -1,1 +1,69 @@
-test.html
+<!DOCTYPE html>
+<html>
+<head>
+<title>LINE Man</title>
+<script src="https://raw.githubusercontent.com/prabeengiri/DeepLinkingToNativeApp/master/deeplink-to-native-app.min.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+try {(function() {
+
+var ua = navigator.userAgent || navigator.vendor || window.opera;
+
+/* android */
+if (/android/i.test(ua)) {
+	//var storeUrl = 'https://play.google.com/store/apps/details?id=com.linecorp.linemanth';
+	//dispatchAndroid(storeUrl);
+
+	alert('hi~~~~~3 ' + new Date());
+	//window.location = 'com.linecorp.linemanth://app/view/home';
+	//var url = 'intent://com.linecorp.linemanth/app/view/home?#Intent;scheme=com.linecorp.linemanth;package=com.linecorp.linemanth;end;';
+	//window.location = 'intent://app/view/home#Intent;scheme=com.linecorp.linemanth;package=com.linecorp.linemanth;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;end';
+	/*
+	https://m.pay.naver.com/send/m/s
+
+	location.href = "intent://inappbrowser?url=" + encodeURIComponent(_sUrl) + "&target=new&version=6#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end";
+	*/
+
+	location.href = "intent://app/view/home#Intent;scheme=com.linecorp.linemanth;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.linecorp.linemanth;end"
+
+/* iOS */
+} else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+  	var storeUrl = 'https://itunes.apple.com/app/line-man-food-grocery-quick/id1076238296';
+	dispatch(storeUrl);
+
+} else {
+	//window.location = 'http://line.me/th/family-apps';
+}
+
+function dispatch(storeUrl) {
+	if (document.location.pathname.startsWith('/R/')) {
+		window.location = 'com.linecorp.linemanth://' + parseScheme(document.location.pathname);
+		setTimeout(function() { window.location = storeUrl; }, 250);
+	} else {
+		window.location = 'http://line.me/th/family-apps';
+	}
+}
+
+function dispatchAndroid(storeUrl) {
+	if (document.location.pathname.startsWith('/R/')) {
+		var url = '/AR/' + parseScheme(document.location.pathname);
+		alert(url);
+		window.location = url;
+	} else {
+		window.location = 'http://line.me/th/family-apps';
+	}
+}
+
+function parseScheme(s) {
+	if (s === '/R/app/view/home') return 'app/view/home';
+	if (s === '/R/app/view/orders') return 'app/view/orders';
+	if (s === '/R/app/view/customer-supports') return 'app/view/customer-supports';
+	return '';
+}
+
+})()} catch(e) {};
+</script>
+</body>
+</html>
