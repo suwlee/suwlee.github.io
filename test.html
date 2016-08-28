@@ -3,58 +3,26 @@
 <head>
     <meta charset="utf-8">
     <META http-equiv="Expires" content="-1"> 
-<META http-equiv="Pragma" content="no-cache"> 
-<META http-equiv="Cache-Control" content="No-Cache"> 
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
-    <meta name="format-detection" content="telephone=no">
-    <title>송금하기 : 네이버페이!</title>
-    <link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/static.mileage/static/160818151/sndm/mobile/css/w_layout.css">
-    <link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/static.mileage/static/160818151/sndm/mobile/css/m_evt.css">
-    <link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/static.mileage/static/160818151/sndm/mobile/remit/css/remit.css">
-    <script type="text/javascript" src="https://ssl.pstatic.net/static.mileage/static/160818151/sndm/js/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="https://ssl.pstatic.net/static.mileage/static/160818151/sndm/js/utils.js"></script>
-    <script type="text/javascript" src="https://ssl.pstatic.net/static.mileage/static/160818151/sndm/js/m.lcslog.js"></script>
+    <META http-equiv="Pragma" content="no-cache"> 
+    <META http-equiv="Cache-Control" content="No-Cache">
+    <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+    <script src="https://raw.githubusercontent.com/prabeengiri/DeepLinkingToNativeApp/master/deeplink-to-native-app.min.js"></script>
     <script type="text/javascript">
-        function checkValidSend() {
-            var isNaverApp = "N";
-            var isAndorid = "Y";
-            var isValidVer = "N";
-            var iOSVersion = "90100";
-
-            var sendUrl = "https://m.pay.naver.com/send/m/remit/remitAddressee";
-            var sendListUrl = "https://m.pay.naver.com/send/m/list/s";
-            if(isNaverApp == "N") {
-                if (window.confirm("1? 송금은 네이버앱에서만 가능합니다. \n네이버앱으로 이동하시겠습니까?")) {
-                    if(isAndorid == "Y") {
-                        //location.href = "intent://inappbrowser?url=" + encodeURIComponent(sendUrl) + "&target=new&version=6#Intent;scheme=com.linecorp.linemanth;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.linecorp.linemanth;end";
-                        location.href = "intent://inappbrowser?url=" + encodeURIComponent(sendUrl) + "&target=new&version=6#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end";
-                        return false;
-                    }
-                }
-            }
-
-            return true;
-        }
-
-        checkValidSend();
+        $(document).ready(function() {
+            NativeAppLauncher.init({
+              appLauncherElId: 'open-app-link', // Element Id of App Launcher button. 
+              notSupportedMessage: 'Sorry, you’ll need to use a different browser to do this.',
+              universalLinkUrl: 'http://man.line.me',
+              appUri: 'myapp://',
+              androidAppId: 'com.linecorp.linemanth',
+              iOsAppStore:'https://itunes.apple.com/app/apple-store/id234234234?pt=12121212&mt=8',
+              debug:false, // Optional
+              campaignCode: 'this-is-test-campaign' // optional, this appends campaign on app store url.
+            });
+        });
     </script>
 </head>
-    <body class="">
+<body class="">
+    <button id="open-app-link">OPEN ~~~~~~~~~~~~~~~~</button>
 <body>
-<form id="remit_form" action="/send/m/remit/remitAddressee" method="post">
-</form>
-<script type="text/javascript">
-"use strict";
-
-function process() {
-    $("form#remit_form").submit();
-}
-
-$(document).ready(function () {
-    process();
-});
-</script>
-<body>
-    <script type="text/javascript">lcs_do();</script>
-</body>
 </html>
