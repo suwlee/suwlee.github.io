@@ -2,25 +2,56 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
-    <META http-equiv="Expires" content="-1"> 
-    <META http-equiv="Pragma" content="no-cache"> 
+    <META http-equiv="Expires" content="-1">
+    <META http-equiv="Pragma" content="no-cache">
     <META http-equiv="Cache-Control" content="No-Cache">
-    <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+    <!-- Include jQuery Mobile stylesheets -->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+    <!-- Include the jQuery library -->
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- Include the jQuery Mobile library -->
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            url = 'intent://com.linecorp.linemanth/app/view/home?#Intent;scheme=com.linecorp.linemanth;package=com.linecorp.linemanth;end;';
+            var url = 'intent://com.linecorp.linemanth/app/view/home?#Intent;scheme=com.linecorp.linemanth;package=com.linecorp.linemanth;end;';
             $('#open-app-link').click(function() {
-                alert('고고씽');
                 location.href = url;
             });
-            setTimeout(function() {
-                alert('자동클릭')
-                $('#open-app-link').click();
-            }, 1000);
+
         });
     </script>
 </head>
 <body class="">
-    <button id="open-app-link">클릭클릭 ~~~~~~~~~~~~~~~~</button>
+<div data-role="page">
+  <div data-role="header">
+    <h1>Welcome To LINE Man</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <a href="#myPopupDialog" data-rel="popup" data-position-to="window" data-transition="fade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">라인맨 고고씽 for Android</a>
+
+    <div data-role="popup" id="myPopupDialog">
+      <div data-role="header">
+        <h1>누르면 라인맨</h1>
+      </div>
+
+      <div data-role="main" class="ui-content">
+        <h2>정말로 갑니다</h2>
+        <p>믿어보셈!</p>
+        <a id="open-app-link" href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-icon-back ui-btn-icon-left" data-rel="back">가까?</a>
+      </div>
+
+      <div data-role="footer">
+        <h1>으아아</h1>
+      </div>
+    </div>
+  </div>
+
+  <div data-role="footer">
+    <h1>오오오</h1>
+  </div>
+</div>
 <body>
 </html>
