@@ -1,68 +1,129 @@
-<!doctype html>
-<!--
-
-  Instructions:
-
-  - Save this file.
-  - Replace "USER" with your GitHub username.
-  - Replace "REPO" with your GitHub repo name.
-  - Replace "Your Project" with your project name.
-  - Upload this file (or commit to GitHub Pages).
-
-  Customize as you see fit!
-
--->
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset='utf-8'>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width">
-
-  <title>Toss Pay</title>
-
-  <!-- Flatdoc -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src='https://cdn.rawgit.com/rstacruz/flatdoc/v0.9.0/legacy.js'></script>
-  <script src='https://cdn.rawgit.com/rstacruz/flatdoc/v0.9.0/flatdoc.js'></script>
-
-  <!-- Flatdoc theme -->
-  <link  href='https://cdn.rawgit.com/rstacruz/flatdoc/v0.9.0/theme-white/style.css' rel='stylesheet'>
-  <script src='https://cdn.rawgit.com/rstacruz/flatdoc/v0.9.0/theme-white/script.js'></script>
-
-  <!-- Meta -->
-  <meta content="Toss Pay" property="og:title">
-  <meta content="Toss Pay description goes here." name="description">
-
-  <!-- Initializer -->
-  <script>
-    Flatdoc.run({
-      //fetcher: Flatdoc.github('suwlee/spike')
-      fetcher: Flatdoc.file('readme.md')
-    });
-  </script>
+<title>LINE Man</title>
+<style>
+	#logo { width:100% }
+</style>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
-<body role='flatdoc'>
+<body>
 
-  <div class='header'>
-    <div class='left'>
-      <h1>Toss Pay</h1>
-      <ul>
-        <li><a href='https://github.com/suwlee/spike'>View on GitHub</a></li>
-        <li><a href='https://github.com/suwlee/spike/issues'>Issues</a></li>
-      </ul>
-    </div>
-    <div class='right'>
-      <!-- GitHub buttons: see http://ghbtns.com -->
-      <iframe src="http://ghbtns.com/github-btn.html?user=suwlee&amp;repo=spike&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+<div data-role="page">
+  <div data-role="main" class="ui-content">
+    <div><img id="logo" src="/img/lineman_main.png" /></div>
+    <a id="launch" href="#myPopupDialog" data-rel="popup" data-position-to="window" data-transition="fade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Open LINE Man</a>
+
+    <div data-role="popup" id="myPopupDialog">
+      <div data-role="main" class="ui-content">
+        <h2>Open LINE Man</h2>
+        <p>Press OK to go.</p>
+        <button id="launch-confirm">OK</button>
+      </div>
     </div>
   </div>
+</div>
 
-  <div class='content-root'>
-    <div class='menubar'>
-      <div class='menu section' role='flatdoc-menu'></div>
-    </div>
-    <div role='flatdoc-content' class='content'></div>
-  </div>
+<script type="text/javascript">
+try {$(document).ready(function() {
 
+$('#launch-confirm').click(function() { 
+	$('#myPopupDialog-popup').hide(); 
+	if (/android/i.test(ua)) {
+  		var storeUrl = 'https://play.google.com/store/apps/details?id=com.linecorp.linemanth';
+		dispatchAndroid(storeUrl);
+	} else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+  		var storeUrl = 'https://itunes.apple.com/app/line-man-food-grocery-quick/id1076238296';
+		dispatch(storeUrl);
+	} 
+	
+});
+
+var ua = navigator.userAgent || navigator.vendor || window.opera;
+alert(ua);
+/* android */
+if (/android/i.test(ua)) {
+  	var storeUrl = 'https://play.google.com/store/apps/details?id=com.linecorp.linemanth';
+	setTimeout(function() { $('#launch').click(); }, 500);
+
+/* iOS */
+} else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+  	var storeUrl = 'https://itunes.apple.com/app/line-man-food-grocery-quick/id1076238296';
+	dispatch(storeUrl);
+
+} else {
+	window.location = 'http://line.me/th/family-apps';
+	//console.log('hi');
+	//console.log('DELETE_ME_LATER: ' + parseScheme(document.location.pathname));
+}
+
+function dispatch(storeUrl) {
+	alert('document.location.pathname: ' + document.location.pathname);
+	if (document.location.pathname.startsWith('/R/')) {
+		window.location = 'com.linecorp.linemanth://' + parseScheme(document.location.pathname);
+		setTimeout(function() { window.location = storeUrl; }, 250);
+	} else {
+		window.location = 'http://line.me/th/family-apps';
+		//console.log('DELETE_ME_LATER: ' + 'com.linecorp.linemanth://' + parseScheme(document.location.pathname));
+	}
+}
+
+function dispatchAndroid(storeUrl) {
+	if (document.location.pathname.startsWith('/R/')) {
+		var url = 'intent://com.linecorp.linemanth/app/view/home?#Intent;scheme=com.linecorp.linemanth;package=com.linecorp.linemanth;end;';
+		location.href = url;
+		setTimeout(function() { window.location = storeUrl; }, 250);
+	} else {
+		location.href = 'http://line.me/th/family-apps';
+		//console.log('DELETE_ME_LATER: ' + 'com.linecorp.linemanth://' + parseScheme(document.location.pathname));
+	}
+}
+
+function parseScheme(s) {
+	// man.line.me/R/app/view/home
+	if (s === '/R/app/view/home') return 'app/view/home';
+
+	// man.line.me/R/app/view/orders
+	if (s === '/R/app/view/orders') return 'app/view/orders';
+
+	// man.line.me/R/app/view/customer-supports
+	if (s === '/R/app/view/customer-supports') return 'app/view/customer-supports';
+
+	var m;
+
+	// man.line.me/R/order/[order-id]
+	m = /\/R\/order\/LM[0-9]+$/.exec(s);
+	if (m !== null) return m[0].substring(3);
+
+	// man.line.me/R/lineman/[order-id]
+	m = /\/R\/lineman\/LM[0-9]+$/.exec(s);
+	if (m !== null) return m[0].substring(3);
+
+	// man.line.me/R/app/service/food/r/[restaurant_id]
+	m = /\/R\/app\/service\/food\/r\/[0-9a-zA-Z]+$/.exec(s);
+	if (m !== null) return m[0].substring(3);
+
+	// man.line.me/R/app/service/messenger
+	if (s === '/R/app/service/messenger') return 'app/service/messenger';
+
+	// man.line.me/R/app/service/food
+	if (s === '/R/app/service/food') return 'app/service/food';
+
+	// man.line.me/R/app/service/convenience
+	if (s === '/R/app/service/convenience') return 'app/service/convenience';
+
+	// man.line.me/R/app/service/messenger/[data_id]
+	m = /\/R\/app\/service\/messenger\/[0-9a-zA-Z]+$/.exec(s);
+	if (m !== null) return m[0].substring(3);
+
+	// man.line.me/R/app/service/food/fav
+	if (s === '/R/app/service/food/fav') return 'app/service/food/fav';
+
+	return '';
+}
+});} catch(e) {};
+</script>
 </body>
 </html>
