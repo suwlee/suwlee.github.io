@@ -60,6 +60,7 @@ if (/android/i.test(ua)) {
 }
 
 function dispatch(storeUrl) {
+	alert('document.location.pathname: ' + document.location.pathname);
 	if (document.location.pathname.startsWith('/R/')) {
 		window.location = 'com.linecorp.linemanth://' + parseScheme(document.location.pathname);
 		setTimeout(function() { window.location = storeUrl; }, 250);
