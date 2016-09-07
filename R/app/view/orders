@@ -42,7 +42,6 @@ $('#launch-confirm').click(function() {
 });
 
 var ua = navigator.userAgent || navigator.vendor || window.opera;
-alert(ua);
 /* android */
 if (/android/i.test(ua)) {
   	var storeUrl = 'https://play.google.com/store/apps/details?id=com.linecorp.linemanth';
@@ -60,7 +59,6 @@ if (/android/i.test(ua)) {
 }
 
 function dispatch(storeUrl) {
-	alert('document.location.pathname: ' + document.location.pathname);
 	if (document.location.pathname.startsWith('/R/')) {
 		window.location = 'com.linecorp.linemanth://' + parseScheme(document.location.pathname);
 		setTimeout(function() { window.location = storeUrl; }, 250);
