@@ -1,57 +1,127 @@
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8">
-    <META http-equiv="Expires" content="-1">
-    <META http-equiv="Pragma" content="no-cache">
-    <META http-equiv="Cache-Control" content="No-Cache">
-    <!-- Include jQuery Mobile stylesheets -->
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-
-    <!-- Include the jQuery library -->
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-    <!-- Include the jQuery Mobile library -->
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var url = 'intent://com.linecorp.linemanth/app/view/home?#Intent;scheme=com.linecorp.linemanth;package=com.linecorp.linemanth;end;';
-            $('#open-app-link').click(function() {
-                location.href = url;
-            });
-            setTimeout(function() {$('#gogo-btn').click();}, 500);
-        });
-    </script>
+<title>LINE Man</title>
+<style>
+	#logo { width:100% }
+</style>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
-<body class="">
-<div data-role="page">
-  <div data-role="header">
-    <h1>Welcome To LINE Man</h1>
-  </div>
+<body>
 
+<div data-role="page">
   <div data-role="main" class="ui-content">
-    <a id="gogo-btn" href="#myPopupDialog" data-rel="popup" data-position-to="window" data-transition="fade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">라인맨 고고씽 for Android</a>
+    <div><img id="logo" src="/img/lineman_main.png" /></div>
+    <a id="launch" href="#myPopupDialog" data-rel="popup" data-position-to="window" data-transition="fade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Open LINE Man</a>
 
     <div data-role="popup" id="myPopupDialog">
-      <div data-role="header">
-        <h1>누르면 라인맨</h1>
-      </div>
-
       <div data-role="main" class="ui-content">
-        <h2>정말로 갑니다</h2>
-        <p>믿어보셈!</p>
-        <button id="open-app-link">가까?</button>
-      </div>
-
-      <div data-role="footer">
-        <h1>으아아</h1>
+        <h2>Open LINE Man</h2>
+        <p>Press OK to go.</p>
+        <button id="launch-confirm">OK</button>
       </div>
     </div>
   </div>
-
-  <div data-role="footer">
-    <h1>오오오</h1>
-  </div>
 </div>
-<body>
+
+<script type="text/javascript">
+try {$(document).ready(function() {
+
+$('#launch-confirm').click(function() { 
+	$('#myPopupDialog-popup').hide(); 
+	if (/android/i.test(ua)) {
+  		var storeUrl = 'https://play.google.com/store/apps/details?id=com.linecorp.linemanth';
+		dispatchAndroid(storeUrl);
+	} else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+  		var storeUrl = 'https://itunes.apple.com/app/line-man-food-grocery-quick/id1076238296';
+		dispatch(storeUrl);
+	} 
+	
+});
+
+var ua = navigator.userAgent || navigator.vendor || window.opera;
+/* android */
+if (/android/i.test(ua)) {
+  	var storeUrl = 'https://play.google.com/store/apps/details?id=com.linecorp.linemanth';
+	setTimeout(function() { $('#launch').click(); }, 500);
+
+/* iOS */
+} else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+  	var storeUrl = 'https://itunes.apple.com/app/line-man-food-grocery-quick/id1076238296';
+	dispatch(storeUrl);
+
+} else {
+	window.location = 'http://line.me/th/family-apps';
+	//console.log('hi');
+	//console.log('DELETE_ME_LATER: ' + parseScheme(document.location.pathname));
+}
+
+function dispatch(storeUrl) {
+	if (document.location.pathname.startsWith('/R/')) {
+		window.location = 'com.linecorp.linemanth://' + parseScheme(document.location.pathname);
+		setTimeout(function() { window.location = storeUrl; }, 250);
+	} else {
+		window.location = 'http://line.me/th/family-apps';
+		//console.log('DELETE_ME_LATER: ' + 'com.linecorp.linemanth://' + parseScheme(document.location.pathname));
+	}
+}
+
+function dispatchAndroid(storeUrl) {
+	if (document.location.pathname.startsWith('/R/')) {
+		var url = 'intent://com.linecorp.linemanth/app/view/home?#Intent;scheme=com.linecorp.linemanth;package=com.linecorp.linemanth;end;';
+		location.href = url;
+		setTimeout(function() { window.location = storeUrl; }, 250);
+	} else {
+		location.href = 'http://line.me/th/family-apps';
+		//console.log('DELETE_ME_LATER: ' + 'com.linecorp.linemanth://' + parseScheme(document.location.pathname));
+	}
+}
+
+function parseScheme(s) {
+	// man.line.me/R/app/view/home
+	if (s === '/R/app/view/home') return 'app/view/home';
+
+	// man.line.me/R/app/view/orders
+	if (s === '/R/app/view/orders') return 'app/view/orders';
+
+	// man.line.me/R/app/view/customer-supports
+	if (s === '/R/app/view/customer-supports') return 'app/view/customer-supports';
+
+	var m;
+
+	// man.line.me/R/order/[order-id]
+	m = /\/R\/order\/LM[0-9]+$/.exec(s);
+	if (m !== null) return m[0].substring(3);
+
+	// man.line.me/R/lineman/[order-id]
+	m = /\/R\/lineman\/LM[0-9]+$/.exec(s);
+	if (m !== null) return m[0].substring(3);
+
+	// man.line.me/R/app/service/food/r/[restaurant_id]
+	m = /\/R\/app\/service\/food\/r\/[0-9a-zA-Z]+$/.exec(s);
+	if (m !== null) return m[0].substring(3);
+
+	// man.line.me/R/app/service/messenger
+	if (s === '/R/app/service/messenger') return 'app/service/messenger';
+
+	// man.line.me/R/app/service/food
+	if (s === '/R/app/service/food') return 'app/service/food';
+
+	// man.line.me/R/app/service/convenience
+	if (s === '/R/app/service/convenience') return 'app/service/convenience';
+
+	// man.line.me/R/app/service/messenger/[data_id]
+	m = /\/R\/app\/service\/messenger\/[0-9a-zA-Z]+$/.exec(s);
+	if (m !== null) return m[0].substring(3);
+
+	// man.line.me/R/app/service/food/fav
+	if (s === '/R/app/service/food/fav') return 'app/service/food/fav';
+
+	return '';
+}
+});} catch(e) {};
+</script>
+</body>
 </html>
